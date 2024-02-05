@@ -1,3 +1,1 @@
-# anatoxins-norcal-2022-23
-to be written :)
-testing 1 2 3 
+This repository contains [in-progress] data and data processing scripts for anatoxin-related projects in northern California.
