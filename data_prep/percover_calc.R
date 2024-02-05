@@ -1,6 +1,11 @@
-#### Script to calculate various averages using the % cover data (where a % cover is given for each transect)
+#### percent cover average calculations
 ### Jordan Zabrecky
 ## 01.03.2024
+
+# This code calculates averages using % cover data for each study reach
+# and additionally each river section (designated by nearby USGS gage)
+# It also tallies the number and percent of transects 
+# where Anabaena or Microcoleus was present
 
 #### Loading libraries & data ####
 
@@ -8,8 +13,8 @@
 lapply(c("tidyverse", "lubridate"), require, character.only = T)
 
 # loading raw % cover data
-percover22_raw <- read.csv("data/raw/percover_2022_raw.csv")
-percover23_raw <- read.csv("data/raw/percover_2023_raw.csv")
+percover22_raw <- read.csv("data_prep/raw/percover_2022_raw.csv")
+percover23_raw <- read.csv("data_prep/raw/percover_2023_raw.csv")
 
 #### Checking data ####
 
@@ -77,9 +82,9 @@ percover22_reach <- average_per_reach(percover22)
 percover23_reach <- average_per_reach(percover23)
 
 # saving new csvs
-setwd("data/working") # saving into the "working" datasets
-write.csv(percover22_reach, "percover_2022_byreach.csv", row.names = TRUE)
-write.csv(percover23_reach, "percover_2023_byreach.csv", row.names = TRUE)
+setwd("data_prep/working") # saving into the "working" datasets
+write.csv(percover22_reach, "percover_2022_byreach.csv", row.names = FALSE)
+write.csv(percover23_reach, "percover_2023_byreach.csv", row.names = FALSE)
 
 #### Calculating % cover averages for each USGS gage section on each sampling day #### 
 ## Only one USGS gage for Russian and Salmon, but 2023 Sfk Eel is divided as Miranda and Standish Hickey
@@ -122,8 +127,5 @@ percover22_gage <- average_per_gage(percover22)
 percover23_gage <- average_per_gage(percover23)
 
 # saving new csvs
-setwd("data/working") # saving into the "working" datasets
-write.csv(percover22_gage, "percover_2022_bygage.csv", row.names = TRUE)
-write.csv(percover23_gage, "percover_2023_bygage.csv", row.names = TRUE)
-
-
+write.csv(percover22_gage, "percover_2022_bygage.csv", row.names = FALSE)
+write.csv(percover23_gage, "percover_2023_bygage.csv", row.names = FALSE)
